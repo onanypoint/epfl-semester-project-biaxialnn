@@ -1,0 +1,10 @@
+[DEFAULT]
+pitch_lowerBound=21
+pitch_upperBound=108
+measure_quantization=16
+
+batch_size=3    
+seq_len=8          
+division_len=16   
+
+musescore_api_key=YOURAPIKEY
