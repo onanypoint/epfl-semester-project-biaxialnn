@@ -11,7 +11,8 @@ def get_score(directory, id, secret, extension):
         urllib.request.urlretrieve(url, str(file))
     return file
 
-def get_scores(df, directory, extension="mxl"):
+def get_scores(df, directory, prefix, extension="mxl"):
+    directory = directory/prefix
     directory.mkdir(exist_ok=True)
 
     print("Retrieving")    
