@@ -73,11 +73,15 @@ def write_batch(batch, file, write_key=False):
         write_csv(file, rows=rows)
     
 def get_metadata(directory, prefix, part=None, parts=None, retrieve_max=100000):
-  """Retrieve musescore score metadata
+    """Retrieve musescore score metadata
     
     This method retreive the musescore score metadata based on the api result.
     It writes directly the retrieved data to disk in a "unrolled" csv where 
     the json data is flattened.
+
+    Note
+    ----
+    Round retrieve_max down to the nearest multiple of SCORE_PER_PAGE
     
     Parameters
     ----------
@@ -105,7 +109,7 @@ def get_metadata(directory, prefix, part=None, parts=None, retrieve_max=100000):
         default_params = get_default_params(part, parts)
         
         print("Requesting...")
-        print("At most",retrieve_max,"scores metadata are going to be retrieved")
+        print("At most", min(retrieve_max,SCORE_PER_PAGE),"scores metadata are going to be retrieved")
         
         def write(results, write_key=False):
             write_batch(json.dumps(results), cw, write_key)  
@@ -114,7 +118,9 @@ def get_metadata(directory, prefix, part=None, parts=None, retrieve_max=100000):
             return []
 
         results = [] 
-        for i in range(int(retrieve_max/SCORE_PER_PAGE)):    
+
+        page_count = max(1, int(retrieve_max/SCORE_PER_PAGE))
+        for i in range(page_count):    
             r = get_page(i, default_params)
             data = json.loads(r.text)
             
@@ -132,8 +138,6 @@ def get_metadata(directory, prefix, part=None, parts=None, retrieve_max=100000):
 
         if results: 
             results = write(results)
-        
-        output_file.close() 
 
         print('Got: {} scores'.format((i+1)*SCORE_PER_PAGE))
     
