@@ -12,11 +12,47 @@ quantization = config.getint('DEFAULT', 'measure_quantization')
 seq_len = config.getint('DEFAULT', 'seq_len')  *  quantization   
 
 def calculate_loss(model, y_true, y_predict):
+    """Calculate loss
+    
+    Note
+    ----
+    We expand the first dimension to match the number of dimension of 
+    the training samples. We have to do this because theano not react well 
+    to ellipses notations.
+    
+    Parameters
+    ----------
+    model : utils.model.Model
+        The model in use
+    y_true : array_like
+    y_predict : array_like
+    
+    Returns
+    -------
+    float
+        The loss value
+    """
     y_true = np.expand_dims(y_true, 0)
     y_predict = np.expand_dims(y_predict, 0)
     return model.loss_func(y_true, y_predict).eval()
 
 def validate(model, pieces, repeat = 3):
+    """Compute validation loss
+    
+    Parameters
+    ----------
+    model : utils.model.Model
+        The model to use
+    pieces : dict
+        Dictrionary containing statematrixes as values
+    repeat : {int}, optional
+        Average over (the default is 3)
+    
+    Returns
+    -------
+    float
+        The validation error average over repeat times.
+    """
     sub_val = []
     for i in range(repeat):
         xIpt, xOpt = map(np.array, model.data_manager.get_piece_segment(pieces))
@@ -26,6 +62,23 @@ def validate(model, pieces, repeat = 3):
     return np.mean(sub_val)
 
 def generate_sample(model, pieces, directory, name):
+    """Generate a sample and save it to disk
+
+    Note
+    ----
+    Only use the first note just as in the original model
+    
+    Parameters
+    ----------
+    model : utils.model.Model
+        The model to use
+    pieces : dict
+        Dictrionary containing statematrixes as values
+    directory : str
+        path to parent folder
+    name : str
+        specific name of the file, will be append after prefix
+    """
     xIpt, xOpt = map(np.array, model.data_manager.get_piece_segment(pieces))
     seed_i, seed_o = (xIpt[0], xOpt[0])
     generated_sample = model.generate_fun(seq_len, 1, np.expand_dims(seed_i, axis=0))
@@ -37,6 +90,36 @@ def generate_sample(model, pieces, directory, name):
     pickle.dump(model.learned_config, open(directory + 'weights/params_{}.p'.format(name), 'wb'))
 
 def train_piece(model, pieces, epochs, directory , start=0, validation_split=0.1):
+    """Train neural networks
+    
+    This method is used to train the biaxial neural network. This method will
+    train for epochs time and will dump to disk the loss (both error and 
+    validation) to disk. 
+
+    Note
+    ----
+    This method can be stopped gracefully.
+    
+    Parameters
+    ----------
+    model : utils.model.Model
+        The model to use
+    pieces : dict
+        Dictrionary containing statematrixes as values
+    epochs : int
+        Number of epoch to train for
+    directory : str
+        path to parent folder
+    start : int, optional
+       at which epochs to start training (the default is 0)
+    validation_split : float, optional
+        Percentage of validation data to use(the default is 0.1)
+    
+    Returns
+    -------
+    (array_like, array_like)
+        The loss arrays
+    """
     stopflag = [False]
     
     split = int(len(pieces)*(1-validation_split))
