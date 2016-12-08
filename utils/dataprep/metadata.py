@@ -9,10 +9,43 @@ client_key=config.get('DEFAULT', 'musescore_api_key')
 api = MuseScoreAPI(client_key=client_key)
 
 def get_page(page, params):
+    """Query musescore api
+    
+    Parameters
+    ----------
+    page : int
+        the page number to retrieve
+    params : dict
+        parameteras used for the api call
+    
+    Returns
+    -------
+    MuseScoreAPI.MuseScoreResponse
+        The query response
+    """
     params.update({'page':page})
     return api.request(resource='score', params=params)
 
 def get_default_params(part=None, parts=None, sort='relevance'):
+    """Get query parameters
+    
+    Parameters
+    ----------
+    part : int
+        [-1;-128] a midi program number, zero based indexed. Drumset is 128 
+        and -1 is undefined (the default is None, which does retrieve. 
+        every part)
+    parts : int
+        The number of parts in the score. 1 for solo scores. 2 for duo etc…
+        (the default is None, which does not impose a number of part).
+    sort : str, optional
+        How to sort the scores.
+    
+    Returns
+    -------
+    dict
+        Dictionary containing the different parameters
+    """
     if part : assert parts 
 
     params = {}  
@@ -22,6 +55,15 @@ def get_default_params(part=None, parts=None, sort='relevance'):
     return params
 
 def write_batch(batch, file, write_key=False):
+    """Write a json to a csv file
+    
+    Parameters
+    ----------
+    batch : json
+        The json two write to csv
+    file : csv file writer
+        Where to write the csv data
+    """
     keys, rows = dicts_to_csv(json_to_dicts(batch))
     if write_key:
         write_csv(file, keys=keys, rows=rows)
@@ -29,6 +71,23 @@ def write_batch(batch, file, write_key=False):
         write_csv(file, rows=rows)
     
 def get_metadata(directory, prefix, part=None, parts=None, retrieve_max=100000):
+  """Retrieve musescore score metadata
+    
+    This method retreive the musescore score metadata based on the api result.
+    It writes directly the retrieved data to disk in a "unrolled" csv where 
+    the json data is flattened.
+    
+    Parameters
+    ----------
+    directory : PostfixPath
+        The path to where the data should be saved
+    prefix : str
+        Prefix to use for the file
+    part : int, optional
+    parts : int, optional
+    retrieve_max : int, optional
+        maximum number of metadata to retrieve (the default is 100000)
+    """
     SCORE_PER_PAGE = 20
     WRITE_THRESHOLD = 500
     
