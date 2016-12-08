@@ -73,7 +73,7 @@ class OutputFormToInputFormOp(theano.Op):
 class Model(object):
 
     def __init__(self, data_manager, t_layer_sizes, p_layer_sizes, dropout=0):
-        print("Initializing Model", end='')
+        print('{:25}'.format("Initializing Model"), end='', flush=True)
         self.t_layer_sizes = t_layer_sizes
         self.p_layer_sizes = p_layer_sizes
         self.dropout = dropout
@@ -94,7 +94,7 @@ class Model(object):
 
         self.epsilon = np.spacing(np.float32(1.0))
 
-        print("\t Done")
+        print("Done")
 
     @property
     def params(self):
@@ -128,7 +128,7 @@ class Model(object):
         return T.neg(T.sum(loglikelihoods))
 
     def setup_train(self):
-        print("Setup Train", end='')
+        print('{:25}'.format("Setup Train"), end='', flush=True)
        
         self.input_mat = T.btensor4()
         self.output_mat = T.btensor4()
@@ -195,7 +195,7 @@ class Model(object):
             allow_input_downcast=True)
 
 
-        print("\t\tDone")
+        print("Done")
 
    
     def _predict_step_note(self, in_data_from_time, *states):
@@ -219,7 +219,7 @@ class Model(object):
             return ensure_list(new_states) + [chosen]
 
     def setup_generate(self):
-        print("Setup Generate", end='')
+        print('{:25}'.format("Setup Generate"), end='', flush=True)
         
         self.generate_seed_input = T.btensor3()
         self.steps_to_simulate = T.iscalar()
@@ -287,4 +287,4 @@ class Model(object):
             allow_input_downcast=True,
             on_unused_input='warn')
 
-        print("\t\tDone")
+        print("Done")

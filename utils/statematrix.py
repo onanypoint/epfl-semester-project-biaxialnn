@@ -2,6 +2,7 @@ import math
 import music21 as m21
 import numpy as np
 import configparser
+import datetime
 
 config = configparser.ConfigParser()
 config.read('config.ini')
