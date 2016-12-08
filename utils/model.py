@@ -122,7 +122,7 @@ class Model(object):
         self.setup_generate()
 
     def loss_func(self, y_true, y_predict):
-        active_notes = T.shape_padright(y_true[...,0])
+        active_notes = T.shape_padright(y_true[:,:,:,0])
         mask = T.concatenate([T.ones_like(active_notes), active_notes, T.repeat(T.ones_like(active_notes), self.output_size-2, -1)], axis=-1)
         loglikelihoods = mask * T.log( 2*y_predict*y_true - y_predict - y_true + 1 + self.epsilon )
         return T.neg(T.sum(loglikelihoods))
@@ -185,7 +185,7 @@ class Model(object):
 
         note_final = get_last_layer(note_result).reshape((n_note,n_batch,n_time, self.output_size)).transpose(1,2,0,3)
         
-        self.cost = self.loss_func(self.output_mat[:,1:,], note_final)
+        self.cost = self.loss_func(self.output_mat[:,1:], note_final)
 
         updates, _, _, _, _ = create_optimization_updates(self.cost, self.params, method="adadelta")
         self.update_fun = theano.function(
