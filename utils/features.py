@@ -234,3 +234,27 @@ class FeatureBuilder(object):
         """
         inputform = [ self.note_state_single_to_input_form(state,time) for time,state in enumerate(statematrix) ]
         return inputform
+
+class FeatureBuilderSimple(FeatureBuilder):
+    """No auxillary information
+
+    The feature space is the 80 basic feature infered from
+    the play/articulations status of each note at each timestep.
+    
+    """
+    
+    @property
+    def feature_count(self):
+        return 80
+
+    def build_auxillary_info(self, note, state):
+        return []
+
+
+
+
+
+
+
+
+
