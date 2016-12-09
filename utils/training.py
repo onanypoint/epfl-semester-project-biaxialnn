@@ -1,4 +1,4 @@
-from tqdm import tqdm
+from tqdm import tqdm, tqdm_notebook
 import _pickle as pickle
 import configparser
 import numpy as np
@@ -135,11 +135,10 @@ def train_piece(model, pieces, epochs, directory , start=0, validation_split=0.1
         stopflag[0] = True
     
     old_handler = signal.signal(signal.SIGINT, signal_handler)
-
-    pbar = tqdm(total=epochs)
+    
+    pbar = tqdm(total=epochs) 
     for i in range(start,start+epochs):
-        pbar.update(1)
-
+        
         if stopflag[0]:
             break
 
@@ -147,7 +146,7 @@ def train_piece(model, pieces, epochs, directory , start=0, validation_split=0.1
 
         if error < lowest_error: 
             lowest_error = error
-            pickle.dump(errors, open(directory + 'weights/params_lowest.p', 'wb'))
+            pickle.dump(model.learned_config, open(directory + 'weights/params_lowest.p', 'wb'))
 
         if i % 200 == 0:
             validation_loss = validate(model, val_pieces)
@@ -158,6 +157,8 @@ def train_piece(model, pieces, epochs, directory , start=0, validation_split=0.1
         if i % 1000 == 0 or (i % 200 == 0 and i < 1000):
             print("epoch {:5d},  generating".format(i))
             generate_sample(model, pieces, directory, str(i))
+
+        pbar.update(1)
 
     pbar.close()
 
