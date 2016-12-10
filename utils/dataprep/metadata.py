@@ -7,6 +7,10 @@ import json
 config = ConfigParser()
 config.read('config.ini')
 
+# Musescore API is not really a package and thus can not be installed directly 
+# using pip. Instead, we directly import it from the current directory. Also 
+# an api object is created. All the api calls will be done using this object.
+
 client_key=config.get('DEFAULT', 'musescore_api_key')
 api = MuseScoreAPI(client_key=client_key)
 
@@ -109,7 +113,7 @@ def get_metadata(directory, prefix, part=None, parts=None, retrieve_max=100000):
         default_params = get_default_params(part, parts)
         
         print("Requesting...")
-        print("At most", min(retrieve_max,SCORE_PER_PAGE),"scores metadata are going to be retrieved")
+        print("At most", max(retrieve_max,SCORE_PER_PAGE),"scores metadata are going to be retrieved")
         
         def write(results, write_key=False):
             write_batch(json.dumps(results), cw, write_key)  
