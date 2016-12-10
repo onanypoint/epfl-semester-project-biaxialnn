@@ -1,21 +1,103 @@
-import theano, theano.tensor as T
+    import theano, theano.tensor as T
 import numpy as np
 import theano_lstm
 from theano_lstm import LSTM, StackedCells, Layer, create_optimization_updates, MultiDropout
 
 def has_hidden(layer):
+    """Whetever the layer has a trainable initial hidden state.
+    
+    Parameters
+    ----------
+    layer : theano_lstm.Layer
+    
+    Returns
+    -------
+    boolean
+        Whetever the layer as hidden state
+    """
     return hasattr(layer, 'initial_hidden_state')
 
 def matrixify(vector, n):
+    """Transform a vector or a matrix into a matrix
+
+    Repeate the vector n times in the 0 axis.
+    
+    Parameters
+    ----------
+    vector : array_like
+        Vector (or matrix) to be repreated
+    n : int
+        Number of repetition
+    
+    Returns
+    -------
+    theano.tensor
+        A theano tensor corresponding to the n times repeated vector
+
+    Example
+    -------
+
+    >>>> vect1.shape
+    (10,)
+    >>>> matrixify(vect1, 5).shape.eval()
+    (5,10)
+    >>>> vect2.shape
+    (10,15)
+    >>>> matrixify(vect2, 5).shape.eval()
+    (5,10,15)
+
+    """
     return T.repeat(T.shape_padleft(vector), n, axis=0)
 
 def initial_state(layer, dimensions = None):
+    """Initialise hidden state
+    
+    Used to initialize any layer with reccurent relation with initial hidden
+    state if needed. None is returned if the network is going to return 
+    something nd thus there is no need to send anything to the next step of the 
+    recurrence.
+    
+    Parameters
+    ----------
+    layer : theano_lstm.Layer
+        The layer of interest
+    dimensions : int, optional
+        The dimension of the needed output (the default is None). It is used 
+        during the creation of the hidden state for the scan function.
+    
+    Returns
+    -------
+    theano.tensor
+       The initial hidden state of the layer if no dimension are given, 
+       a matrixified version of the initial hidden state otherwise or None 
+       if layer has no hidden layer.
+    """
     if dimensions is None:
         return layer.initial_hidden_state if has_hidden(layer) else None
     else:
         return matrixify(layer.initial_hidden_state, dimensions) if has_hidden(layer) else None
 
 def initial_state_with_taps(layer, dimensions = None):
+    """Optionally wrap tensor variable into a dict with taps=[-1]
+    
+    Used during creation of a scan function. Indeed the function need to know
+    in which order to process the input. More information on the "taps" 
+    parameter can be found here:
+
+    - http://deeplearning.net/software/theano/library/scan.html
+    
+    Parameters
+    ----------
+    layer : theano_lstm.layer
+    dimensions : int, optional
+        The dimension of the needed output (the default is None). It is used 
+        during the creation of the hidden state for the scan function.
+    
+    Returns
+    -------
+    dict or None
+        A dictionary with the relevent state and taps
+    """
     state = initial_state(layer, dimensions)
     if state is not None:
         return dict(initial=state, taps=[-1])
@@ -23,6 +105,15 @@ def initial_state_with_taps(layer, dimensions = None):
         return None
 
 class PassthroughLayer(Layer):
+    """Empty layer
+
+    Used to get the final output of LSTM layers.
+
+    Note
+    ----
+    Should be added to a theano_lstm.StackedCells after a reccurent layer.
+    
+    """
     
     def __init__(self):
         self.is_recursive = False
@@ -42,31 +133,97 @@ class PassthroughLayer(Layer):
         pass       
 
 def get_last_layer(result):
+    """Get last element (layer)
+    
+    Used to return the output of the last layer of theano_lstm.StackedCells
+    if it has multiple layer and the output directly if it is a simple layer.
+    
+    Parameters
+    ----------
+    result : array_like
+    
+    Returns
+    -------
+    array_like
+        final output of the stackecells or the given layer
+    """
     if isinstance(result, list):
         return result[-1]
     else:
         return result
 
 def ensure_list(result):
+    """Make sure result is a list
+        
+    Parameters
+    ----------
+    result : object
+    
+    Returns
+    -------
+    array_like
+        The input list or the object wrapped in a list
+    """
     if isinstance(result, list):
         return result
     else:
         return [result]
 
 class OutputFormToInputFormOp(theano.Op):
-    # Properties attribute
+    """Theano operation to go from output space to feature space
+    
+    More information can be found here:
+
+    - http://deeplearning.net/software/theano/extending/extending_theano.html
+    
+    Attributes
+    ----------
+    __props__ : tuple
+        Properties attribute
+    """
+
     __props__ = ()
 
     def __init__(self, data_manager, *args):
         self.d = data_manager
 
     def make_node(self, state, time):
+        """Creates an Apply node representing the application of the op on 
+        the inputs provided.
+        
+        Parameters
+        ----------
+        state : array_like
+            The state to transform into feature space
+        time : int
+            The current time being processed
+        
+        Returns
+        -------
+        theano.Apply
+            [description]
+        """
         state = T.as_tensor_variable(state)
         time = T.as_tensor_variable(time)
         return theano.Apply(self, [state, time], [T.bmatrix()])
     
-    # Python implementation:
     def perform(self, node, inputs_storage, output_storage):
+        """Peform the transformation from output to feature space.
+        
+        Defines the Python implementation of the op. It is in charge of doing 
+        the processing to go from output space (statematrix) to feature space.
+        
+        Parameters
+        ----------
+        node : 
+            Reference to an Apply node which was previously obtained via 
+            the Op‘s make_node() method.
+        inputs_storage : array_like
+            A list of references to data which can be operated on using 
+            non-symbolic statements
+        output_storage : array_like
+            A list of storage cells where the output is to be stored
+        """
         state, time = inputs_storage
         output_storage[0][0] = np.array(self.d.f.note_state_single_to_input_form(state, time), dtype='int8')
 

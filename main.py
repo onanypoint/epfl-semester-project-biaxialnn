@@ -28,6 +28,7 @@ def main():
     train.add_argument("-p", "--p-layer-sizes", default=[100,50])
     train.add_argument("-r", "--dropout", type=float, default=0.5)
     train.add_argument("-v", "--validation-split", type=float, default=0.1)
+    train.add_argument("-m", "--model-config", default=None)
 
     generate = sp.add_parser("generate")
     generate.set_defaults(command="generate")
@@ -67,6 +68,9 @@ def main():
         pieces = pickle.load(open(args.statematrix_file, 'rb'))
         model = Model(datamanager, args.t_layer_sizes, args.p_layer_sizes, dropout=args.dropout)
         model.setup()
+
+        if args.model_config:
+            model.learned_config = pickle.load(open(args.model_config,'rb'))
         
         print("Training")
         train_piece(model, pieces, args.training_epochs, directory=args.output_directory, validation_split=args.validation_split)

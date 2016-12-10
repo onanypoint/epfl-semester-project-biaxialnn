@@ -1,8 +1,16 @@
+cycler==0.10.0
+matplotlib==1.5.3
+music21==3.1.0
 numpy==1.11.2
 oauthlib==2.0.1
 pandas==0.19.1
+pyparsing==2.1.10
 python-dateutil==2.6.0
 pytz==2016.10
 requests==2.12.3
 requests-oauthlib==0.7.0
+scipy==0.18.1
 six==1.10.0
+Theano==0.9.0.dev4
+theano-lstm==0.0.15
+tqdm==4.10.0
