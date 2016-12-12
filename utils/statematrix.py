@@ -289,7 +289,7 @@ class StateMatrixBuilderArticulations(StateMatrixBuilder):
     def information_count(self):
         return 2 + len(self.articulations)
 
-    def streamToStatematrix(self, stream):
+    def stream_to_statematrix(self, stream):
         fy = lambda n: n.pitch.ps
 
         s = stream.flat
@@ -353,7 +353,7 @@ class StateMatrixBuilderArticulations(StateMatrixBuilder):
 
         return statematrix[:max_time]
 
-    def statematrixToStream(self, statematrix):
+    def statematrix_to_stream(self, statematrix):
 
         def _add_articulation(note, articulations_list):
             for i, art in enumerate(articulations_list):
@@ -377,7 +377,7 @@ class StateMatrixBuilderArticulations(StateMatrixBuilder):
 
                 if art and play:
                     if note:
-                        add_articulation(note, articulations_values)
+                        _add_articulation(note, articulations_values)
                         note.quarterLength = time / 4.0
                         s.insert(start / 4.0, note)
 
@@ -387,7 +387,7 @@ class StateMatrixBuilderArticulations(StateMatrixBuilder):
                     start = t
 
                 if not play and note:
-                    add_articulation(note, articulations_values)
+                    _add_articulation(note, articulations_values)
                     note.quarterLength = time / 4.0
                     s.insert(start / 4.0, note)
                     note = None

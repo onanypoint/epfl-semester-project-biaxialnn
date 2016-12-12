@@ -263,7 +263,7 @@ class FeatureBuilderArticulations(FeatureBuilder):
     def feature_count(self):
         return 80 + len(articulations)
     
-    def buildAuxillaryInfo(self, note, state):
+    def build_auxillary_info(self, note, state):
         return state[note, 2:]
 
 

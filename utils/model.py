@@ -280,7 +280,7 @@ class Model(object):
 
     def loss_func(self, y_true, y_predict):
         active_notes = T.shape_padright(y_true[:,:,:,0])
-        mask = T.concatenate([T.ones_like(active_notes), active_notes, T.repeat(T.ones_like(active_notes), self.output_size-2, -1)], axis=-1)
+        mask = T.concatenate([T.ones_like(active_notes), active_notes, T.repeat(active_notes, self.output_size-2, -1)], axis=-1)
         loglikelihoods = mask * T.log( 2*y_predict*y_true - y_predict - y_true + 1 + self.epsilon )
         return T.neg(T.sum(loglikelihoods))
 
@@ -371,8 +371,9 @@ class Model(object):
                 
             shouldPlay = self.srng.uniform() < (probabilities[0] ** self.conservativity)
             shouldArtic = shouldPlay * (self.srng.uniform() < probabilities[1])
+            articulations = [shouldPlay * (self.srng.uniform() < probabilities[i]) for i in range(2, self.output_size)]
      
-            chosen = T.stack([T.cast(shouldPlay, 'int8'), T.cast(shouldArtic, 'int8')])
+            chosen = T.stack([T.cast(shouldPlay, 'int8'), T.cast(shouldArtic, 'int8')] + [ T.cast(p, 'int8') for p in articulations])
             return ensure_list(new_states) + [chosen]
 
     def setup_generate(self):
