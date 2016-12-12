@@ -116,12 +116,12 @@ class DataManager(object):
             try:
                 piece_output = random.choice(list(pieces.values()))
                 start = random.randrange(0,len(piece_output)-seq_len,division_len)
-                if verbose: print("Range is {} {} {} -> {}".format(0,len(piece_output)-seq_len,division_len, start))
+                #if verbose: print("Range is {} {} {} -> {}".format(0,len(piece_output)-seq_len,division_len, start))
                 break
             except:
-               pass
+                pass
 
-        if i == 100: raise IllegalArgumentError(ValueError)
+        if i == 99: raise ValueError("No valid segment found")
 
         seg_out = piece_output[start:start+seq_len]
         seg_in = self.f.note_state_matrix_to_input_form(seg_out)

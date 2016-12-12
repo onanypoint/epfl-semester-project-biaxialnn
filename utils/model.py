@@ -1,4 +1,4 @@
-    import theano, theano.tensor as T
+import theano, theano.tensor as T
 import numpy as np
 import theano_lstm
 from theano_lstm import LSTM, StackedCells, Layer, create_optimization_updates, MultiDropout

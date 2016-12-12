@@ -27,60 +27,21 @@ class StateMatrixBuilder(object):
         length.
     """
 
-    def preprocess_stream(self, stream):
+    def preprocess_sstream(self, stream):
         """
         Preprocess music21.stream object.
-
-        Preprocess music21.stream object into a more suitable stream. 
-        For now, only keep the first voice it finds. This is done to avoid 
-        the cumbersome work of knowing in which part/voice the generate note
-        belongs.
-        
-        Note
-        ----
-        Only keep the first part or voice it finds.
         
         Parameters
         ----------
         stream : music21.stream
             The stream to process.
+        
         Returns
         -------
         music21.stream
             The preprocessed stream.
         """
-
-        def verify_time_signature(stream, ts_numerator = [2,4]):
-            """Whethever the timesignature is valid.
-
-            Parameters
-            ----------
-            stream : music21.stream
-                The stream to preprocess
-            ts_numerator : {list of int}, optional
-                The "autorized" timesignature numerator (the default is [2,4]).
-            
-            Returns
-            -------
-            boolean
-                Return if the stream is considered valid based on time
-                signature.
-            """
-            time_signature = stream.getElementsByClass("TimeSignature")
-            ts_list = [t.numerator not in ts_numerator for t in time_signature]
-            return sum(ts_list) > 0
-
-        for part in stream.parts:
-            if verify_time_signature(part):
-                continue
-
-            if not len(part.voices):
-                return part
-
-            for v in part.voices:
-                return v
-
-        return
+        raise NotImplementedError()
 
     @property
     def information_count(self):
@@ -199,6 +160,9 @@ class StateMatrixBuilderSimple(StateMatrixBuilder):
     def information_count(self):
         return 2
 
+    def preprocess_stream(self, stream):
+        return stream
+        
     def stream_to_statematrix(self, stream):
         fy = lambda n: n.pitch.ps
 
