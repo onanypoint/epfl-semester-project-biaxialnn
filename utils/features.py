@@ -2,6 +2,8 @@ import itertools
 import configparser
 import numpy as np
 
+from .statematrix import articulations
+
 config = configparser.ConfigParser()
 config.read('config.ini')
 
@@ -251,8 +253,18 @@ class FeatureBuilderSimple(FeatureBuilder):
         return []
 
 
-
-
+class FeatureBuilderArticulations(FeatureBuilder):
+    """Add articulations information
+    
+    Rely on a one hot encoding
+    """
+    
+    @property
+    def feature_count(self):
+        return 80 + len(articulations)
+    
+    def buildAuxillaryInfo(self, note, state):
+        return state[note, 2:]
 
 
 

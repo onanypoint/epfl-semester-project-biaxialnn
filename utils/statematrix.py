@@ -267,3 +267,135 @@ class StateMatrixBuilderSimple(StateMatrixBuilder):
         s.append(p)
         
         return s
+
+articulations = [
+    m21.articulations.Accent,
+    m21.articulations.DetachedLegato,
+    m21.articulations.Staccato,
+    m21.articulations.StrongAccent,
+    m21.articulations.Tenuto,
+]
+
+class StateMatrixBuilderArticulations(StateMatrixBuilder):
+
+    def __init__(self, articulations=articulations):
+        self.articulations = articulations
+        self.art2index = dict((art().name, i)
+                              for i, art in enumerate(self.articulations))
+        self.index2art = dict((i, art())
+                              for i, art in enumerate(self.articulations))
+
+    @property
+    def information_count(self):
+        return 2 + len(self.articulations)
+
+    def streamToStatematrix(self, stream):
+        fy = lambda n: n.pitch.ps
+
+        s = stream.flat
+
+        duration = max(s.highestTime, s.duration.quarterLength)
+        quantization_normalized = int(quantization / 4)
+        duration_quantized = int(math.ceil(duration * quantization / 4)) + 1
+        span = upperBound - lowerBound
+
+        statematrix = np.zeros(
+            (duration_quantized, span, self.information_count))
+        max_time = 0
+
+        for obj in s.flat.getElementsByClass((m21.meter.TimeSignature, m21.note.Note, m21.chord.Chord, m21.dynamics.DynamicWedge)):
+            valueObjPairs = []
+            if isinstance(obj, m21.note.Note):
+                valueObjPairs = [(fy(obj), obj)]
+
+            elif isinstance(obj, m21.chord.Chord):
+                values = self._extract_chord_data(fy, obj)
+                valueObjPairs = [(v, obj) for v in values]
+
+            elif isinstance(obj, m21.meter.TimeSignature):
+                if obj.numerator not in (2, 4):
+                    print("Found time signature event {}. Bailing!".format(
+                        obj.ratioString))
+                    return statematrix[:max_time]
+                continue
+
+            for v, objSub in valueObjPairs:
+                numericValue = m21.common.roundToHalfInteger(v)
+
+                if (numericValue < lowerBound) or (numericValue >= upperBound):
+                    print("Note {} at time {} out of bounds (ignoring)".format(
+                        numericValue, objSub.offset))
+                    pass
+
+                else:
+                    start = objSub.offset
+                    length = objSub.quarterLength
+                    tie = self._get_note_tie(objSub)
+
+                    start_quant = int(start * quantization_normalized)
+                    length_quant = int(length * quantization_normalized)
+                    end_quant = start_quant + length_quant
+                    max_time = max(max_time, end_quant)
+
+                    if start_quant != end_quant:
+                        statematrix[start_quant:end_quant,
+                                    numericValue - lowerBound, 0] = 1
+
+                    if not tie or tie == 'start':
+                        statematrix[start_quant,
+                                    numericValue - lowerBound, 0:2] = 1
+
+                    if hasattr(objSub, 'articulations'):
+                        for a in objSub.articulations:
+                            if a.name in self.art2index:
+                                statematrix[start_quant, numericValue -
+                                            lowerBound, 2 + self.art2index[a.name]] = 1
+
+        return statematrix[:max_time]
+
+    def statematrixToStream(self, statematrix):
+
+        def _add_articulation(note, articulations_list):
+            for i, art in enumerate(articulations_list):
+                if art == 1:
+                    note.articulations.append(self.index2art[i])
+
+        s = m21.stream.Stream()
+
+        statematrix = statematrix.astype(bool)
+
+        for i, values in enumerate(statematrix.transpose((1, 0, 2))):
+            pitch = i + lowerBound
+
+            note = None
+            time = 0
+            articulations_values = []
+
+            for t, values in enumerate(values):
+                play, art = values[0:2]
+                dynamics = values[-2:-1]
+
+                if art and play:
+                    if note:
+                        add_articulation(note, articulations_values)
+                        note.quarterLength = time / 4.0
+                        s.insert(start / 4.0, note)
+
+                    note = m21.note.Note(pitch)
+                    articulations_values = values[2:2 + len(articulations)]
+                    time = 0
+                    start = t
+
+                if not play and note:
+                    add_articulation(note, articulations_values)
+                    note.quarterLength = time / 4.0
+                    s.insert(start / 4.0, note)
+                    note = None
+                    time = 0
+                    start = None
+                    articulations_values = []
+
+                if play:
+                    time = time + 1
+
+        return s
