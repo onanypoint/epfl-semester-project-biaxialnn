@@ -25,11 +25,11 @@ If you want to run the model on GPU, you also need to have a _```theanorc```_ ([
 
 Before running any machine learning code you will have to obtain a large collection of score file. Those should be placed in a data folder dedicated to "raw" scores. 
 
-There is an [jupyter notebook]() included showing an example of a pipeline goining through the data retrieval from [musescore.com](http://musescore.com/). The preprocessing to go from the "raw" score to the statematrix representation. And finally the training of the model before generating a score.
+There is a [jupyter notebook]() included showing an example of a pipeline goining through the data retrieval from [musescore.com](http://musescore.com/). The preprocessing to go from the "raw" score to the statematrix representation. And finally the training of the model before generating a score.
 
 Other source of "raw" scores:
 - [piano-midi.de/](http://www.piano-midi.de/)
--
+- [musescore.com](ttp://www.musescore.com)
 -
 
 ## Interface
@@ -47,14 +47,15 @@ Configuration options are:
 ```
 pitch_lowerBound        #   Minimum midi pitch number taken into account during 
                             the processing phase. If a note lower than that is 
-                            encountered, a warning will be shown.
+                            encountered, it will be discarded and a warning 
+                            will be shown.
 
 pitch_upperBound        #   Maximum midi pitch number taken into account.
 
 measure_quantization    #   In how many timestep a measure is divided into. By
                             default it is 16 meaning that each quarter note is
                             "subdivided" into four. Making the 16th note the 
-                            shortes note representable.
+                            shortest note representable.
 
 batch_size              #   Number of score segment to process in parallel
                             during the training phase. Be aware that the bigger
@@ -83,7 +84,7 @@ run using the default values and on the minimal dataset present in the repositor
 
 ##### Warning
 An iteration of traing is around 10 secondes on a GTX 650. The training can be
-gracefully stopped by ```CTRL-C```.
+gracefully stopped with ```CTRL-C```.
 
 -------------
 
