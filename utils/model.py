@@ -1,7 +1,7 @@
 import theano, theano.tensor as T
 import numpy as np
 import theano_lstm
-from theano_lstm import LSTM, StackedCells, Layer, create_optimization_updates, MultiDropout
+from theano_lstm import LSTM, StackedCells, Layer, create_optimization_updates, MultiDropout, apply_dropout
 
 def has_hidden(layer):
     """Whetever the layer has a trainable initial hidden state.
@@ -244,7 +244,10 @@ class Model(object):
 
         p_input_size = t_layer_sizes[-1] + self.output_size
         self.pitch_model = StackedCells( p_input_size, celltype=LSTM, layers = p_layer_sizes)
-        self.pitch_model.layers.append(Layer(p_layer_sizes[-1], self.output_size, activation = T.nnet.sigmoid))
+        self.pitch_model.layers.append(PassthroughLayer())
+
+        self.pitch_play = Layer(p_layer_sizes[-1], 2, activation = T.nnet.sigmoid)
+        self.pitch_articulations = [Layer(p_layer_sizes[-1], 2, activation = T.nnet.softmax) for _ in range(int((self.output_size -2 )/2))]
 
         self.conservativity = T.fscalar()
         self.srng = T.shared_randomstreams.RandomStreams(np.random.randint(0, 1024))
@@ -338,11 +341,23 @@ class Model(object):
         note_result, _ = theano.scan(fn=step_note, sequences=[note_inputs], non_sequences=note_masks, outputs_info=note_outputs_info)
         
 
-        self.note_thoughts = note_result
+        # PITCH PLAY
+        note_play_mask = get_dropout([self.p_layer_sizes[-1]], get_last_layer(note_result).shape[1])
+        note_last_layer = apply_dropout(get_last_layer(note_result), note_play_mask)
+        note_play_result = self.pitch_play.activate(note_last_layer.reshape((n_note*n_batch*n_time, self.p_layer_sizes[-1])))
+        note_final = note_play_result.reshape((n_note, n_batch, n_time, 2)).transpose(1,2,0,3)
 
-        note_final = get_last_layer(note_result).reshape((n_note,n_batch,n_time, self.output_size)).transpose(1,2,0,3)
+        # PITCH ARTICULATIONS
+        articulations_out = []
+        for i in range(int((self.output_size -2 )/2)):
+            note_art_mask = get_dropout([self.p_layer_sizes[-1]], get_last_layer(note_result).shape[1])
+            note_last_layer = apply_dropout(get_last_layer(note_result), note_play_mask)
+            note_art_result = self.pitch_articulations[i].activate(note_last_layer.reshape((n_note*n_batch*n_time, self.p_layer_sizes[-1])))
+            articulations_out.append(note_play_result.reshape((n_note, n_batch, n_time, 2)).transpose(1,2,0,3))
+
+        note_final = T.concatenate([note_final] + articulations_out, axis = -1)
         
-        self.cost = self.loss_func(self.output_mat[:,1:], note_final)
+        self.cost = self.loss_func(self.output_mat[:,1:,:,:], note_final)
 
         updates, _, _, _, _ = create_optimization_updates(self.cost, self.params, method="adadelta")
         self.update_fun = theano.function(
@@ -367,13 +382,25 @@ class Model(object):
                 masks = []
 
             new_states = self.pitch_model.forward(in_data, prev_hiddens=hiddens, dropout=masks)
-            probabilities = get_last_layer(new_states)
-                
+            new_states_last = get_last_layer(new_states)
+
+            new_states_last = apply_dropout(get_last_layer(new_states), [0.5])
+            
+            probabilities = self.pitch_play.activate(new_states_last)
+
+            articulations_out = []
+            for i in range(int((self.output_size -2 )/2)):
+                art_prob = articulations_out.append(self.pitch_articulations[i].activate(new_states_last,  [0.5]))
+                if art_prob[0] > art_prob[1]:
+                    articulations_out = articulations_out + [1,0]
+                else:
+                    articulations_out = articulations_out + [0,1]
+
             shouldPlay = self.srng.uniform() < (probabilities[0] ** self.conservativity)
             shouldArtic = shouldPlay * (self.srng.uniform() < probabilities[1])
             articulations = [shouldPlay * (self.srng.uniform() < probabilities[i]) for i in range(2, self.output_size)]
      
-            chosen = T.stack([T.cast(shouldPlay, 'int8'), T.cast(shouldArtic, 'int8')] + [ T.cast(p, 'int8') for p in articulations])
+            chosen = T.stack([T.cast(shouldPlay, 'int8'), T.cast(shouldArtic, 'int8')] + [ T.cast(p, 'int8') for p in articulations_out])
             return ensure_list(new_states) + [chosen]
 
     def setup_generate(self):

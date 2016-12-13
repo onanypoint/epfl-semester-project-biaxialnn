@@ -290,7 +290,7 @@ class StateMatrixBuilderArticulations(StateMatrixBuilder):
         
     @property
     def information_count(self):
-        return 2 + len(self.articulations)
+        return 2 + 2*len(self.articulations)
 
     def stream_to_statematrix(self, stream):
         fy = lambda n: n.pitch.ps
@@ -302,8 +302,12 @@ class StateMatrixBuilderArticulations(StateMatrixBuilder):
         duration_quantized = int(math.ceil(duration * quantization / 4)) + 1
         span = upperBound - lowerBound
 
-        statematrix = np.zeros(
-            (duration_quantized, span, self.information_count))
+        f = lambda i,v : 1 if i%2 != 0 else 0
+        arti = np.asarray([f(i,v) for i,v in enumerate(np.zeros((duration_quantized, span, 2*len(self.articulations))).reshape(duration_quantized*span*2*len(self.articulations)))]).reshape((duration_quantized,span,2*len(self.articulations)))
+        statematrix = np.append(np.zeros((duration_quantized, span, 2)), arti, axis = -1)
+        statematrix
+
+
         max_time = 0
 
         for obj in s.flat.getElementsByClass((m21.meter.TimeSignature, m21.note.Note, m21.chord.Chord, m21.dynamics.DynamicWedge)):
@@ -351,16 +355,21 @@ class StateMatrixBuilderArticulations(StateMatrixBuilder):
                     if hasattr(objSub, 'articulations'):
                         for a in objSub.articulations:
                             if a.name in self.art2index:
-                                statematrix[start_quant, numericValue -
-                                            lowerBound, 2 + self.art2index[a.name]] = 1
+                                statematrix[start_quant:end_quant, numericValue - lowerBound, 2 + 2*self.art2index[a.name]] = 1
+                                statematrix[start_quant:end_quant, numericValue - lowerBound, 2 + 2*self.art2index[a.name]+1] = 0
 
         return statematrix[:max_time]
+
+
+    def grouped(iterable, n):
+        "s -> (s0,s1,s2,...sn-1), (sn,sn+1,sn+2,...s2n-1), (s2n,s2n+1,s2n+2,...s3n-1), ..."
+        return zip(*[iter(iterable)]*n)
 
     def statematrix_to_stream(self, statematrix):
 
         def _add_articulation(note, articulations_list):
-            for i, art in enumerate(articulations_list):
-                if art == 1:
+            for i, art in enumerate(grouped(articulations_list,2)):
+                if art[0] == 1:
                     note.articulations.append(self.index2art[i])
 
         s = m21.stream.Stream()
@@ -376,7 +385,6 @@ class StateMatrixBuilderArticulations(StateMatrixBuilder):
 
             for t, values in enumerate(values):
                 play, art = values[0:2]
-                dynamics = values[-2:-1]
 
                 if art and play:
                     if note:
