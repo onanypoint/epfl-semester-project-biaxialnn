@@ -27,7 +27,7 @@ class StateMatrixBuilder(object):
         length.
     """
 
-    def preprocess_sstream(self, stream):
+    def preprocess_stream(self, stream):
         """
         Preprocess music21.stream object.
         
@@ -285,6 +285,9 @@ class StateMatrixBuilderArticulations(StateMatrixBuilder):
         self.index2art = dict((i, art())
                               for i, art in enumerate(self.articulations))
 
+    def preprocess_stream(self, stream):
+        return stream
+        
     @property
     def information_count(self):
         return 2 + len(self.articulations)

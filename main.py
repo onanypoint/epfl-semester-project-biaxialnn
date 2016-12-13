@@ -45,12 +45,12 @@ def main():
     args = parser.parse_args()
 
     from utils.data import DataManager
-    from utils.features import FeatureBuilderSimple
+    from utils.features import FeatureBuilderArticulations
     from utils.model import Model
-    from utils.statematrix import StateMatrixBuilderSimple
+    from utils.statematrix import StateMatrixBuilderArticulations
     from utils.training import train_piece
 
-    datamanager = DataManager(FeatureBuilderSimple(),StateMatrixBuilderSimple())
+    datamanager = DataManager(FeatureBuilderArticulations(),StateMatrixBuilderArticulations())
 
     if args.command == 'preprocess':
         dirpath = args.input_directory
