@@ -21,7 +21,7 @@ def main():
 
     train = sp.add_parser("train")
     train.set_defaults(command="train")
-    train.add_argument("-f", "--statematrix-file", default="data/music_statematrix.pkl", help="File containing statematrix pickel, i.e output of the preprocessing.")
+    train.add_argument("-f", "--statematrix-file", default="data/example_statematrix.pkl", help="File containing statematrix pickel, i.e output of the preprocessing.")
     train.add_argument("-o", "--output-directory", default="output/", help="Where to save meta information during training.")
     train.add_argument("-e", "--training-epochs", type=int, default=10000, help="Number of iterations to run for.")
     train.add_argument("-t", "--t-layer-sizes", default=[300,300], help="List of size for each LSTM layer used for the time model.")
