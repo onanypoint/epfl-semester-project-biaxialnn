@@ -18,7 +18,7 @@ class DataManager(object):
     
     Enable easy access to both the Feature builder and the state matrix 
     builder. Usefull when defining a full pipeline from statematrix generation
-    to model creatin to generation. It simplify the interaction with the sizes
+    to model creation to generation. It simplify the interaction with the sizes
     of both feature vectors and output vectors.
     
     Parameters
@@ -41,7 +41,7 @@ class DataManager(object):
         """Process scores to statematrix
         
         Use to process a scores (in xml, mid, etc) to a statematrix format. 
-        Will use the basename of the scores (name of the file) as key in 
+        Will use the base name of the scores (name of the file) as key in 
         the dictionary.
         
         Parameters
@@ -129,10 +129,10 @@ class DataManager(object):
         return seg_in, seg_out
 
     def get_piece_batch(self, pieces):
-        """Return input and ouput representation in batch form.
+        """Return input and output representation in batch form.
         
         Return the input and output representation based on this data manager
-        in a batched form. It is used during the training phase. It enable 
+        in a batched form. It is used during the training phase. It enables
         the "concatenation" of multiple sequences into a single training sample.
         
         Parameters

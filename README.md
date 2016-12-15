@@ -6,7 +6,7 @@ These instructions will get you a copy of the project up and running on your mac
 
 ### Prerequisites
 
-The codebase is written in python. The bare minimum you should need to do to get everything running, assuming you have Python and conda installed, is
+The codebase is written in python. The bare minimum you should do to get everything running, assuming you have Python and conda installed, is
 
 ```shell
 # Clone the repo
@@ -23,14 +23,13 @@ If you want to run the model on GPU, you also need to have a _```theanorc```_ ([
 
 ### Before starting
 
-Before running any machine learning code you will have to obtain a large collection of score file. Those should be placed in a data folder dedicated to "raw" scores. 
+Before running any machine learning code, you will have to obtain a large collection of score file. Those should be placed in a data folder dedicated to "raw" scores.
 
-There is a [jupyter notebook]() included showing an example of a pipeline goining through the data retrieval from [musescore.com](http://musescore.com/). The preprocessing to go from the "raw" score to the statematrix representation. And finally the training of the model before generating a score.
+There is a [jupyter notebook]() included showing an example of a pipeline going through the data retrieval from [musescore.com](http://musescore.com/). The pre-processing to go from the "raw" score to the statematrix representation. And finally the training of the model before generating a score.
 
 Other source of "raw" scores:
 - [piano-midi.de/](http://www.piano-midi.de/)
 - [musescore.com](ttp://www.musescore.com)
--
 
 ## Interface
 
@@ -55,7 +54,7 @@ pitch_upperBound        #   Maximum midi pitch number taken into account.
 measure_quantization    #   In how many timestep a measure is divided into. By
                             default it is 16 meaning that each quarter note is
                             "subdivided" into four. Making the 16th note the 
-                            shortest note representable.
+                            shortest note which can be represented.
 
 batch_size              #   Number of score segment to process in parallel
                             during the training phase. Be aware that the bigger
@@ -68,9 +67,9 @@ division_len            #   Minimum number of timestep between two sequences
                             taken from the same score.
 
 musescore_api_key       #   Musescore API Key. Only used during data retrieval.
-                            More info can found on developers.musescore.com
+                            More info can be found on developers.musescore.com
 ```
-A CLI implementation is also included.
+A CLI implementation is included.
 
 ### Usage
 
@@ -83,7 +82,7 @@ Without any options running the preprocess, train and generate command will be
 run using the default values and on the minimal dataset present in the repository.
 
 ##### Warning
-An iteration of traing is around 10 secondes on a GTX 650. The training can be
+A training iteration takes around 10 seconds on a GTX 650. The training can be
 gracefully stopped with ```CTRL-C```.
 
 -------------
@@ -109,7 +108,7 @@ optional arguments:
 $ python main.py train --help                    
   -h, --help            show this help message and exit
   -f STATEMATRIX_FILE, --statematrix-file STATEMATRIX_FILE
-                        File containing statematrix pickel, i.e output of the
+                        File containing statematrix pickle, i.e output of the
                         preprocessing.
   -o OUTPUT_DIRECTORY, --output-directory OUTPUT_DIRECTORY
                         Where to save meta information during training.

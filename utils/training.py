@@ -52,7 +52,7 @@ def validate(model, pieces, repeat = 3):
     Returns
     -------
     float
-        The validation error average over repeat times.
+        The validation error average over repeated times.
     """
     sub_val = []
     for i in range(repeat):
@@ -114,7 +114,7 @@ def train_piece(model, pieces, epochs, directory , start=0, validation_split=0.1
     start : int, optional
        at which epochs to start training (the default is 0)
     validation_split : float, optional
-        Percentage of validation data to use(the default is 0.1)
+        Percentage of validation data to use (the default is 0.1)
     
     Returns
     -------

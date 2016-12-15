@@ -7,7 +7,7 @@ import json
 config = ConfigParser()
 config.read('config.ini')
 
-# Musescore API is not really a package and thus can not be installed directly 
+# Musescore API is not really a package and thus cannot be installed directly 
 # using pip. Instead, we directly import it from the current directory. Also 
 # an api object is created. All the api calls will be done using this object.
 
@@ -22,7 +22,7 @@ def get_page(page, params):
     page : int
         the page number to retrieve
     params : dict
-        parameteras used for the api call
+        parameter as used for the api call
     
     Returns
     -------

@@ -52,7 +52,7 @@ def matrixify(vector, n):
 def initial_state(layer, dimensions = None):
     """Initialise hidden state
     
-    Used to initialize any layer with reccurent relation with initial hidden
+    Used to initialize any layer with reccurrent relation with initial hidden
     state if needed. None is returned if the network is going to return 
     something nd thus there is no need to send anything to the next step of the 
     recurrence.
@@ -96,7 +96,7 @@ def initial_state_with_taps(layer, dimensions = None):
     Returns
     -------
     dict or None
-        A dictionary with the relevent state and taps
+        A dictionary with the relevant state and taps
     """
     state = initial_state(layer, dimensions)
     if state is not None:
@@ -111,7 +111,7 @@ class PassthroughLayer(Layer):
 
     Note
     ----
-    Should be added to a theano_lstm.StackedCells after a reccurent layer.
+    Should be added to a theano_lstm.StackedCells after a recurrent layer.
     
     """
     

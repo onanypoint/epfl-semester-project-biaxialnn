@@ -23,7 +23,7 @@ class FeatureBuilder(object):
     def feature_count(self):
         """Return the number of features
         
-        It is used during the model creation. The model can not infer the size 
+        It is used during the model creation. The model cannot infer the size 
         of each input before running time.
 
         Returns
@@ -91,7 +91,7 @@ class FeatureBuilder(object):
             i : int
                 Index of element of interest
             d : array_like
-                Default output if index does not exists
+                Default output if index does not exist
             
             Returns
             -------
@@ -149,7 +149,7 @@ class FeatureBuilder(object):
             
             Build the time representation used as features. It is hardcoded 
             to be represented in 4 feature (quantization = 16). It returns 
-            the binary representation of the time modula 16 (except that it 
+            the binary representation of the time modulo 16 (except that it 
             returns -1 instead of 0. 
             
             Parameters
@@ -230,7 +230,7 @@ class FeatureBuilder(object):
         Returns
         -------
         array_like
-            The feature represenation of the statematrix.
+            The feature representation of the statematrix.
         """
         inputform = [ self.note_state_single_to_input_form(state,time) for time,state in enumerate(statematrix) ]
         return inputform
@@ -238,7 +238,7 @@ class FeatureBuilder(object):
 class FeatureBuilderSimple(FeatureBuilder):
     """No auxillary information
 
-    The feature space is the 80 basic feature infered from
+    The feature space is the 80 basic feature computed from
     the play/articulations status of each note at each timestep.
     
     """

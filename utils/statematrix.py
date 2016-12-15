@@ -47,7 +47,7 @@ class StateMatrixBuilder(object):
     def information_count(self):
         """Return the number of features
         
-        It is used during the model creation. The model can not infer the size 
+        It is used during the model creation. The model cannot infer the size 
         of output before running time.
 
         Returns
@@ -149,7 +149,7 @@ class StateMatrixBuilder(object):
 class StateMatrixBuilderSimple(StateMatrixBuilder):
     """Minimal statematrix builder
     
-    This builder construct statematrix (or stream) using only the play and 
+    This builder constructs statematrix (or stream) using only the play and 
     articulations informations. If going from state to stream, builds a 
     music21.stream object with the minimal construction based on a straight 
     forward approach.
