@@ -27,7 +27,7 @@ class StateMatrixBuilder(object):
         length.
     """
 
-    def preprocess_sstream(self, stream):
+    def preprocess_stream(self, stream):
         """
         Preprocess music21.stream object.
         

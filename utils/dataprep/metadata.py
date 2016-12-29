@@ -124,7 +124,8 @@ def get_metadata(directory, prefix, part=None, parts=None, retrieve_max=100000):
         results = [] 
 
         page_count = max(1, int(retrieve_max/SCORE_PER_PAGE))
-        for i in range(page_count):    
+        for i in range(page_count):  
+            print('/', end="")
             r = get_page(i, default_params)
             data = json.loads(r.text)
             

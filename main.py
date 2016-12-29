@@ -38,7 +38,7 @@ def main():
     generate.add_argument("-s", "--seed",  required=True, help="Score to use as seed for generation.")
     generate.add_argument("-l", "--length", type=int, default=80, help="Number of timestep to generate.")
     generate.add_argument("-c", "--conservativity", type=float, default=1, help="Conservativity value, i.e. how much freedom is given to the generation process.")
-    generate.add_argument("-m", "--model-config", default="output/weights/params_final.p", help="Model config (trained weights) to load before starting generation.")
+    generate.add_argument("-m", "--model-config", default="output/weights/example_params.p", help="Model config (trained weights) to load before starting generation.")
     generate.add_argument("-o", "--output-directory", default="output/", help="Where to save the generated samples.")
     generate.add_argument("-n", "--name", default="generated", help="Name of the generated sample.")
 
