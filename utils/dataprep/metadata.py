@@ -133,7 +133,7 @@ def get_metadata(directory, prefix, part=None, parts=None, retrieve_max=100000):
                 print('No more data to fetch.')
                 break
             
-            results.extend(data)  
+            results.extend(data['score'])  
             
             if i == 0:
                 results = write(results, write_key=True)
