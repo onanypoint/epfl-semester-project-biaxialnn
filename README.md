@@ -6,11 +6,11 @@ These instructions will get you a copy of the project up and running on your mac
 
 ### Prerequisites
 
-The codebase is written in python. The bare minimum you should do to get everything running, assuming you have Python and conda installed, is
+The codebase is written in python. The bare minimum you should do to get everything running, assuming you have running conda environement, is
 
 ```shell
 # Clone the repo
-git clone git://XXXXXXXXXX biaxialnn
+https://github.com/onanypoint/epfl-semester-project-biaxialnn.git biaxialnn
 cd biaxialnn
 
 # Install dependencies
@@ -28,8 +28,9 @@ Before running any machine learning code, you will have to obtain a large collec
 There is a [jupyter notebook]() included showing an example of a pipeline going through the data retrieval from [musescore.com](http://musescore.com/). The pre-processing to go from the "raw" score to the statematrix representation. And finally the training of the model before generating a score.
 
 Other source of "raw" scores:
+
 - [piano-midi.de/](http://www.piano-midi.de/)
-- [musescore.com](ttp://www.musescore.com)
+- [musescore.com](http://www.musescore.com)
 
 ## Interface
 
@@ -163,10 +164,6 @@ optional arguments:
 
 * [Theano](http://www.deeplearning.net/software/theano/) - Machine learning framework
 * [Music21](http://web.mit.edu/music21/) - Toolkit for computer-aided musicology
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
