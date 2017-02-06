@@ -199,6 +199,8 @@ The statematrix is further processed into an input-form to make the available fe
 
 Let's say we look at the following score and for the encoding we assume that only B4 and C5, respectively 71 and 72 in _MIDI_ can be represented
 
+[input]: imgs/biaxial/example_input.png "input" 
+![Alt text][input] 
 
 The state-matrix would be the following:
 
