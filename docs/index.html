@@ -1,6 +1,897 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+
+<meta charset="utf-8">
+<title>blogpost</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+
+</head>
+
 <body>
-<h1>Hello World</h1>
+
+<h1 id="toc_0">Score generation using recurrent neural networks</h1>
+
+<p><em>Project realized at <a href="epfl.ch">Swiss Federal Institute of Technology in Lausanne</a> (EPFL) by Yoann Ponti, supervised by Nathanaël Perraudin et Michaël Defferrard.</em></p>
+
+<p><em>The complementary repository can be found <a href="">here</a></em></p>
+
+<p>Neural nets have been used in many different ways during the last few years, from recognition in computer vision to artificial intelligence in games and even music generation. Once a domain reserved to the scientific community, it is now possible without much effort to create your own neural networks (NN) thanks to amazing libraries maintained by the community. Lately some projects related to music generation and composition have emerged, such as the <a href="https://magenta.tensorflow.org/">magenta</a> project from Google or the use of deepmind <a href="https://deepmind.com/blog/wavenet-generative-model-raw-audio/">wavenet</a> to generate raw audio waveforms. As music depends on time, most of the models used to generate music rely on some tricks to take account of it. A sliding-window CNN or a FC NN could do it by looking at the previously generated notes, but most of the model we looked at used some kinds of recurrent neural networks (RNN).</p>
+
+<p>An important point is that the vast majority of those projects take only interest in the music generation where the results are to be listened to. Most of them generate a <em>MIDI</em> like output, i.e. the output is related to a decision to play or not a certain note. But, music has at least another side, it has its own language which is transcribed into music sheet. The goal of our project was to take this other path and try to assess the feasibility of generating music scores using RNN. </p>
+
+<p>Before tackling the model creation, it is necessary to build a dataset suitable for training and find the restrictions that are coming with it.</p>
+
+<h2 id="toc_1">Data retrieval</h2>
+
+<p>To deal with musicology on a computer we decided to rely on the <a href="http://web.mit.edu/music21/doc/index.html"><em>music21</em></a> library. It is well maintained and offers a wide range of possibilities. Of course several other project are available, such as <a href=""></a> and <a href=""></a>. Relying on an object-oriented infrastructure to offer a uniform API makes its code clear and reusing existing code simple whatever the underlying score format is. There exists a multitude of score formats, each with their own costs and benefits. A complete list of the format parseable by <em>music21</em> can be found in their <a href="http://web.mit.edu/music21/doc/moduleReference/moduleConverter.html#music21.converter.Converter.defaultSubconverters">documentation</a>.</p>
+
+<p>One of the most widespread format is <em>MIDI</em>. Even though it is simplified, the <em>MIDI</em> format can be seen as a piano-roll. Just like the one we see in Western movies except that instead of punched holes, we deal with a suite of <code>events</code> in binary format. There is no notion of measure, the speed at which we go through the score is determined by a tempo. To go into a little bit more details, each event is composed by a <code>time-stamp</code> and a <code>status</code> field. The time accumulates for each time stamp (i.e. the time-stamp represents the time offset since the last event) and the status indicates information such as where the note starts playing, ends and at what volume <sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup><sup id="fnref2"><a href="#fn2" rel="footnote">2</a></sup>.</p>
+
+<p><em>MusicXML</em> as its name implies is an XML-based file format. The format is proprietary, but can be freely used under a Public License. <em>MusicXML</em> exists in two formats, an uncompressed version <code>.xml</code> and a compressed one <code>.mxl</code> <sup id="fnref3"><a href="#fn3" rel="footnote">3</a></sup>. The uncompressed version is easily readable and correspond closely to the music21 representation.</p>
+
+<p>For example, </p>
+
+<div><pre><code class="language-markup"># MusicXML
+&lt;note&gt;
+    &lt;pitch&gt;
+      &lt;step&gt;C&lt;/step&gt;
+      &lt;octave&gt;4&lt;/octave&gt;
+    &lt;/pitch&gt;
+    &lt;duration&gt;4&lt;/duration&gt;
+    &lt;type&gt;whole&lt;/type&gt;
+&lt;/note&gt;</code></pre></div>
+
+<p>is represented in <em>music21</em> by a single object <code>music21.note.Note</code> with its attributes being duration and type. Using an XML based format presents a window of opportunity for representing bits and pieces specific to music sheets such as articulation marks, dynamics, etc. It is widely used for score-writing and is supported by most major software dedicated to this task.</p>
+
+<p>An interesting read for an in depth review of the differences in representations would be the book <a href="https://mitpress.mit.edu/books/beyond-midi">Beyond MIDI</a> by Eleanor Selfridge-Field.</p>
+
+<p>The dataset was created using <a href="http://musescore.com/">musescore.com</a> as it offers an API wrapper and the score library seemed well-filled. Other possibilities encountered were:</p>
+
+<ul>
+<li><a href="http://kern.ccarh.org/">kern.ccarh.org</a> (Kern** Humdrum)</li>
+<li><a href="https://www.gutenberg.org/">gutenberg.org</a> (MusicXML)</li>
+<li><a href="http://www.piano-midi.de/">piano-midi.de</a> (Midi)</li>
+</ul>
+
+<p>We could have worked directly with the <a href="http://www.piano-midi.de/">piano-midi</a> dataset as we are almost certain that all scores are of good quality. The pieces of this dataset are all from great composer. Unfortunately, as the name implies all the scores are in <em>MIDI</em> format which does not completely fit our needs. There is a lack of information that we might want to use later on in order to generate scores, such as articulation marks.</p>
+
+<p>The related code used in this post can be found on <a href="">git#TODO</a>. You can also find a reference notebook which goes through the followed pipeline or simply use the <a href="">dataprep#TODO</a> files to retrieve MusicXML scores. Due to the implementation of the <em>musecore</em> API, the metadata have to be retrieved first which offers the possibility of choosing beforehand which scores to finally retrieve, thus avoiding unnecessary downloads. </p>
+
+<p>We have two attributes at our disposal to filter the API query. </p>
+
+<ul>
+<li><strong><em>part</em></strong> : An integer attribute representing a midi program number, zero based indexed where the Drumset is 128 and -1 is undefined.</li>
+<li><strong><em>parts</em></strong>:  The number of parts in the score, i.e. 1 for solo scores, 2 for duo , etc. We only took interest in pieces for a single piano.</li>
+</ul>
+
+<p>Here is a minimal working example to retrieve scores from musescore based on the code available on our repository.</p>
+
+<div><pre><code class="language-none">import pandas as pd
+from utils.dataprep.metadata import *
+from utils.dataprep.scores import *
+
+# Retrieve all metadata information into a ms_parts_1_meta.csv file
+meta_file = get_metadata(&#39;&#39;, &#39;ms_parts_1&#39;, parts=1, part=0)
+df = pd.read_csv(meta_file)
+
+# Retrieve all score files based on the metadata file
+get_scores(df, &#39;&#39;, &#39;ms_parts_1&#39;)</code></pre></div>
+
+<p>To determine which score to retrieve, we looked specifically at the self explanatory attributes: &#39;&#39;&#39;comment_count&#39;&#39;&#39;, &#39;&#39;&#39;download_count&#39;&#39;&#39;, &#39;&#39;&#39;favoriting_count&#39;&#39;&#39; and &#39;&#39;&#39;playback_count&#39;&#39;&#39; of the metadata. Our expectations were that by looking at how the community reacted to the score, we should be able to determine the quality of a score. A high quality score should have higher values in the attributes mentionned above than a score of lower quality.</p>
+
+<p>Unfortunately, the listed attributes do not contain much information for the large majority of scores. Indeed, as shown in the <a href="#Table%20musescore">table</a> and in <a href="#Musescore%20Piano%20metadata">figure 1</a>, we can see that most of the scores have a low count for each of the parameters. Most of the scores have never been commented, marked as favorite or even played. The only attribute with a more spread distribution is the download count, but it is still difficult to decide on a threshold for inclusion in the dataset. </p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: right">count</th>
+<th style="text-align: center">comments</th>
+<th style="text-align: center">downloads</th>
+<th style="text-align: center">favorites</th>
+<th style="text-align: center">playbacks</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: right">mean</td>
+<td style="text-align: center">1</td>
+<td style="text-align: center">132</td>
+<td style="text-align: center">8</td>
+<td style="text-align: center">35</td>
+</tr>
+<tr>
+<td style="text-align: right">std</td>
+<td style="text-align: center">5</td>
+<td style="text-align: center">381</td>
+<td style="text-align: center">29</td>
+<td style="text-align: center">190</td>
+</tr>
+<tr>
+<td style="text-align: right">min</td>
+<td style="text-align: center">0</td>
+<td style="text-align: center">0</td>
+<td style="text-align: center">0</td>
+<td style="text-align: center">0</td>
+</tr>
+<tr>
+<td style="text-align: right">50%</td>
+<td style="text-align: center">0</td>
+<td style="text-align: center">45</td>
+<td style="text-align: center">1</td>
+<td style="text-align: center">9</td>
+</tr>
+<tr>
+<td style="text-align: right">75%</td>
+<td style="text-align: center">0</td>
+<td style="text-align: center">108</td>
+<td style="text-align: center">6</td>
+<td style="text-align: center">26</td>
+</tr>
+<tr>
+<td style="text-align: right">max</td>
+<td style="text-align: center">367</td>
+<td style="text-align: center">23497</td>
+<td style="text-align: center">1383</td>
+<td style="text-align: center">22406</td>
+</tr>
+</tbody>
+</table>
+
+<p><em><strong>Table 1</strong> : Most of the musescore pieces don&#39;t reflect a positive reaction from the community with the exception of certain instances.</em></p>
+
+<p><img src="imgs/ms_meta.png" alt="Alt text" title="Musescore Piano metadata"> 
+<em><strong>Figure 1</strong> : Most of the musescore pieces don&#39;t reflect a positive reaction from the community.</em>   </p>
+
+<p>Because we couldn&#39;t really use the metadata, we tried instead to assess the complexity of a score. Interesting approaches exist such as <sup id="fnref4"><a href="#fn4" rel="footnote">4</a></sup> to deal with such a task, but we decided to take an easier path and looked at the average number of notes and chords per measure. We assumed that the number of notes per measure is a simple indicator of the sounding complexity of a score i.e. a score will be closer to a simple riddle or a piece intended for learning/training (with scale and such) if the number of notes per measure is low. </p>
+
+<p>So, we had to retrieve a bunch of scores. For comparison, we also analyzed the <a href="http://www.piano-midi.de/">piano-midi.de</a> dataset, which is as stated above composed of well-known pieces from great composer. Just to get a feeling of the dataset, we looked at the pitch distribution. As we might expect, most of the notes are played between the third and fifth octave , i.e. between C3 and B5 (<a href="#Pitch_Distribution">fig. 2</a>). </p>
+
+<p><img src="imgs/piano-midi_pitch.png" alt="Pitch Distribution" title="Musescore Piano metadata"> 
+<em><strong>Figure 2</strong> : Most of the played notes are located between the third and the fifth octave. (For clarity, some pitch name have been omitted in the axis ticks.)</em></p>
+
+<p>The musescore dataset seems to be less elaborated than the one found in the piano-midi dataset. This is shown in <a href="#Note_Average_PM">figure 3</a>, which plots the distribution of the number of notes per measure. The distributions seems to show that most of the scores from the musescore dataset are simple music sheets. This assertion has been confirmed by manual inspection: most of the pieces are simple riddle. </p>
+
+<p><img src="imgs/piano-midi_average.png" alt="Alt text" title="Musescore analysis"> </p>
+
+<p><img src="imgs/ms_average.png" alt="Alt text" title="Piano-midi analysis"> 
+<em><strong>Figure 3</strong> : A large part of the musescore pieces seems to be on the low end of complexity since they contain only a few notes per measures.</em></p>
+
+<p>The dataset was finally created by keeping the scores with an average number of note per measure between 3 and 15.</p>
+
+<h2 id="toc_2">Recurrent Neural Networks</h2>
+
+<p>As stated before, music generation should rely on some sort of recurrent neural networks or any other way to model temporal dependencies. A recurrent neural network is a neural network where there exists a cycle between each unit. This has for effect to create an internal state of the network. It means the network assumes that it exists a dependence between each input and perform the computations for every element of a sequence, with the output computed with both the new input and the result of the previous computations. As RNN maintain states, they are good at modeling sequence.  </p>
+
+<p>Some improvements have been made along the years such as <em>Long Short-Term Memory</em> (LSTM) and <em>Gated Recurrent Unit</em> (GRU). Those improvements prevent back-propagated errors from vanishing or exploding for example. LSTM and GRU layers are readily available in machine learning packages and can be used as a plug and play. An in-depth review of this kind of neural networks can be found (not limited to) here:</p>
+
+<ul>
+<li><a href="http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/">Recurrent Neural Networks tutorial</a> (Denny Britz)</li>
+<li><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">Understanding LSTMs</a> (Christopher Olah)</li>
+<li><a href="http://nikhilbuduma.com/2015/01/11/a-deep-dive-into-recurrent-neural-networks/">A deep dive into recurrent neural networks</a> (Nikhil Buduma)</li>
+</ul>
+
+<p>The step was to look at which models already exist, a few of them are listed below:</p>
+
+<ul>
+<li><a href="https://magenta.tensorflow.org/">Magenta</a> is the Google take on open source deep learning music project. It relies on tensorflow. Most of their models are related to monophonic music generation even though a polyphonic model implementation has been made available.</li>
+<li><a href="https://github.com/jisungk/deepjazz">Deepjazz</a> as the name implies is used to generate jazz song. It uses two stacked LSTM layer and relies on a single <em>MIDI</em> file for training. The implementation is closely related to this <a href="https://github.com/jamong/music-rnn">one</a>.</li>
+<li><a href="http://www.wise.io/tech/asking-rnn-and-ltsm-what-would-mozart-write">Joshua Bloom</a> implemented a model which generates directly a score in **kern format. As concluded by the author, his network learned to create almost valid file, but lacks understanding of how the music should sound.</li>
+</ul>
+
+<h3 id="toc_3">Neural Networks Training</h3>
+
+<h4 id="toc_4">2 Layer LSTM</h4>
+
+<p>We first took inspiration from Andrej Karpathy <a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/">RNN implementation for text generation</a>. His blogpost pushed some people to implement their own version (trained on Obama speeches or Eminem lyrics) and at least one <a href="https://highnoongmt.wordpress.com/2015/05/22/lisls-stis-recurrent-neural-networks-for-folk-music-generation/">music generation version</a> relying on the abc notation for training.</p>
+
+<h5 id="toc_5">Model</h5>
+
+<p>Our first model follows the approach of stacking up two LSTM layers. Each measure was divided in 16 time-steps and we used a one hot encoding to go from score to feature space. The network is represented in <a href="#LSTM%20Model">figure 4</a>. The model we took inspiration from was used to generate text. So to be more closely related to it, we only looked at monophonic music. Indeed, for text generation, only one letter is generated at a time which corresponds to one note per time-step in our model. The training set was created by concatenating every scores with an <code>END</code> token interposed between each score. We then cut this long piano-roll into segments of length 128 corresponding to 8 measures with a 4/4 time signature. The example of the pianoroll representation can be found in <a href="#Space_1">figure 5</a>. The segments were finally shuffled before being fed to the neural network for training.</p>
+
+<p><img src="imgs/model_lstm.png" alt="Alt text" title="Model 1"> 
+<em><strong>Figure 4</strong> : Visual summary of the model composed of two LSTM layers.</em></p>
+
+<p><img src="imgs/space_1.jpg" alt="Alt text" title="Space 1"> 
+<em><strong>Figure 5</strong> : Pianoroll representation of the music pieces used in the first network.</em></p>
+
+<p>The model learned to generate somewhat pleasing series of notes and to generate correctly the <code>END</code>` token. A sample from the first epoch can be compared to a sample generated after the 30 epochs.</p>
+
+<h5 id="toc_6">Sample after epoch 1</h5>
+
+<p><audio src="imgs/lstm_1.mp3" preload="auto" controls></audio></p>
+
+<h5 id="toc_7">Sample after epoch 30</h5>
+
+<p><audio src="imgs/lstm_2.mp3" preload="auto" controls></audio></p>
+
+<p>The network seems to have learned to avoid jumping from one octave to another and tries to create plausible progression. Below you can find the music sheet representation for the second sample based on the output of the network without any post processing. Unfortunately this model is limited to monophonic music and there are still some problems with some note than are out of the current musical scale.</p>
+
+<p><img src="imgs/lstm_2_raw.png" alt="Alt text" title="Out raw"> 
+<em><strong>Figure 5</strong> : The raw output is missing some features such as key signature to be more readable.</em></p>
+
+<p>Even tough the network produces something relatively interesting, there is room for improvement. The first change would be allowing the network to generate polyphonic music. One of the ways to achieve this goal would be to change how the decision to generate a note is made. We could trade the softmax to a sigmoid for example. If we look at the generated score, we can already see it is only a series of notes. It should be possible to make the score more readable by trying to extract a key signature or simply by removing the natural key. A possible result that might be achievable using post-processing can be seen in <a href="#LSTM_Out_Clean">figure 6</a>, but this is more engineering than machine learning.</p>
+
+<p><img src="imgs/lstm_2_clean.png" alt="Alt text" title="Out clean"> 
+<em><strong>Figure 6</strong> : Some processing on the raw output make the music sheet more readable and understandable.</em></p>
+
+<h4 id="toc_8">Biaxial Neural Network</h4>
+
+<p>Instead of letting the network learn everything for itself we can try to use our musical knowledge to build the network in a more clever way. The next iteration tries to bring more properties into the network and the feature space used. For example we bring a notion of time, the fact that playing a C twice should be different from holding a single C or that each note has a relation with the one around them. We stumble upon Daniel Johnson&#39;s <a href="http://www.hexahedria.com/2015/08/03/composing-music-with-recurrent-neural-networks/">post</a> about music composition and decided to get inspiration from it.</p>
+
+<h5 id="toc_9">Model</h5>
+
+<p>To summarize, the model relies on two networks of stacked LSTM layers. The first one does the recurrence over time (time RNN) and the second one does it over pitch (pitch RNN). The second network uses the output of the first one (can be seen as a &quot;time pattern&quot;) concatenated with the state of the last time step. The second network then scans up from low notes to high notes. We thus have a transposition of dimension in the middle of the network between the time axis and the pitch axes. The model is depicted in <a href="#Biaxial_Model">figure 7</a>.</p>
+
+<p><img src="imgs/model_biaxial.png" alt="Alt text" title="Model 1">
+<em><strong>Figure 7</strong> : Visual summary of the model composed of two RNNs doing the reccurence over time and pitch.</em></p>
+
+<p>As before, we are not able to work directly with the musicXML format. In the first network, the scores were processed to form a piano-roll embedded in two dimensional space (<a href="#Space_1">fig. 5</a>). Now, we use a three dimensional space (pitch, time-step, features) (<a href="#Space_2">fig. 8</a>) to ease the transposition in the middle of the network. The most simple features space is composed of the play status and the articulation status of the note. Indeed, to be able to reconstruct the score we need a least to know when a note starts playing and when it stops. Thus, each pitch is encoded in its own single state, the single states are then stacked together to form the statematrix.</p>
+
+<p><img src="imgs/space_2.jpg" alt="Alt text" title="Space 2"> 
+<em><strong>Figure 8</strong> : Statematrix representation of the music pieces used in the second network.</em></p>
+
+<p>The statematrix is further processed into an input-form to make the available feature space more rich. In the time network, each state of the statematrix is fed independently to the RNN. In order to obtain some sort of a time pattern for each pitch we have to bring some information about its surroundings by doing some feature engineering. The input-form can be seen as four concatenated parts. The first one called <strong><em>position</em></strong> encodes the pitch value of a note (based on <em>MIDI</em> pitch values transposed to start at zero). The <strong><em>pitch class</em></strong> is used to determine the position of the note in the chromatic scale and it is based on a zero one encoding. The <strong><em>position</em></strong> and <strong><em>pitch class</em></strong> features taken together enable the network to find in which part of the musical scale the note is situated. The context is given by the <strong><em>previous vicinity</em></strong> and the <strong><em>previous context</em></strong>. The big part of the input space is taken by the <strong><em>previous vicinity</em></strong>. It contains the state of the staff at a specific time, looking one octave up and octave down from the pitch being processed. On the other hand, the <strong><em>previous context</em></strong> is related to the <strong><em>pitch class</em></strong> attribute and encodes how many times a pitch of the chromatic scale is played at the same time, it is computed starting at the pitch of interest. Thus, it also encode the distance between the pitch played at the same time. This gives the neural net. information about chords and what notes can and should be played simultaneously. Finally, the network is given a notion of time with the <strong><em>beat</em></strong> part which consists of a binary representation of the position of the note in the measure (i.e. from 0 to 15). Taken altogether, we end up with an input space of 80 features.</p>
+
+<p>Let&#39;s say we look at the following score and for the encoding we assume that only B4 and C5, respectively 71 and 72 in <em>MIDI</em> can be represented</p>
+
+<p>The state-matrix would be the following:</p>
+
+<div><pre><code class="language-none">[
+    [
+        [ 1.,  1.], # State of the B4 pitch at time step 1, i.e. played
+        [ 0.,  0.]  # State of the B4 pitch at time step 2, i.e. not played
+    ],
+    [
+        [ 0.,  0.], # State of the C5 pitch at time step 1, i.e. not played
+        [ 1.,  1.]  # State of the C5 pitch at time step 2, i.e. played
+    ]  
+]</code></pre></div>
+
+<p>and the input form, the state of the note is put in bold in the <strong><em>previous vicinity</em></strong> to ease the reading of the long binary representation:</p>
+
+<table>
+  <tr>
+    <th colspan="3">Time step 1</th>
+  </tr>
+  <tr>
+    <td rowspan="5"><strong>B4</strong></td>
+    <td>position (1)</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>pitch class (12)</td>
+    <td>000000000001</td>
+  </tr>
+  <tr>
+    <td>previous vicinity (50)</td>
+    <td>000000000000000000000000 <strong>11</strong> 000000000000000000000000</td>
+  </tr>
+  <tr>
+    <td>previous context (12)</td>
+    <td>100000000000</td>
+  </tr>
+  <tr>
+    <td>beat (4)</td>
+    <td>0000</td>
+  </tr>
+  <tr>
+    <td rowspan="5"><strong>C5</strong></td>
+    <td>position (1)</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>pitch class (12)</td>
+    <td>100000000000</td>
+  </tr>
+  <tr>
+    <td>previous vicinity (50)</td>
+    <td>000000000000000000000011 <strong>00</strong> 000000000000000000000000</td>    
+     </tr>
+  <tr>
+    <td>previous context (12)</td>
+    <td>000000000001</td>
+  </tr>
+  <tr>
+    <td>beat (4)</td>
+    <td>0000</td>
+  </tr>
+  <tr>
+    <th colspan="3">Time step 2</th>
+  </tr>
+  <tr>
+    <td rowspan="5"><strong>B4</strong></td>
+    <td>position (1)</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>pitch class (12)</td>
+    <td>000000000001</td>
+  </tr>
+  <tr>
+    <td>previous vicinity (50)</td>
+    <td>000000000000000000000000 <strong>00</strong> 110000000000000000000000</td>
+  </tr>
+  <tr>
+    <td>previous context (12)</td>
+    <td>010000000000</td>
+  </tr>
+  <tr>
+    <td>beat (4)</td>
+    <td>0001</td>
+  </tr>
+  <tr>
+    <td rowspan="5"><strong>C5</strong></td>
+    <td>position (1)</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>pitch class (12)</td>
+    <td>100000000000</td>
+  </tr>
+  <tr>
+    <td>previous vicinity (50)</td>
+    <td>000000000000000000000000 <strong>11</strong> 000000000000000000000000</td>
+  </tr>
+  <tr>
+    <td>previous context (12)</td>
+    <td>100000000000</td>
+  </tr>
+  <tr>
+    <td>beat (4)</td>
+    <td>0001</td>
+  </tr>
+</table>
+
+<p><em><strong>Table 2</strong> : Example of input form</em> </p>
+
+<p>A more in-depth description of the base model is available on the <a href="http://www.hexahedria.com/2015/08/03/composing-music-with-recurrent-neural-networks/">original model blogpost</a>.</p>
+
+<p>The next few lines will point out how the model was trained and how the score were finally generated. Due to the nature of the network, the training was separated into two phases. First, the statematrix expanded into input-form is fed to the time network where each single state pitch is processed independently of each other. Keeping in mind that we know in advance the whole score, we can do the recurrence over each time-step one after the other and obtain an output (time pattern) for each pitch at each time-step. The time patterns are then concatenated with the statematrix. Afterwards, the pitch and time dimensions are transposed such that the second RNN (pitch network) can do its recurrence along the note axis which scans up from low notes to high notes. Finally, after the last RNN layer there is a non-recurrent output layer that outputs two values: the play probability and the articulation probability such that we obtain a statematrix. The cross entropy is then used as the loss function with masking based on play decision, i.e. there is no penalty if the network decides that the note should be articulated, but has decided not to play it.</p>
+
+<p>The generation is a bit more complicated as we don&#39;t know in advance which notes are played. In the original network, it was done by using a single time-step as seed. We modified it to cope with seeds of any length. The seed is fed to the time network to prepare its hidden state. There is no need to run the pitch recurrent network as it is reset after every time-step.</p>
+
+<p>The score has to be generated incrementally due to the recurrence over pitch which can only be done when the pitch is one half tone lower than the one we look to try has been generated. An example of generation is depicted in <a href="#gen">Figure 9</a> which displays a simplified version with only three pitches. The seed is in blue and of length 1.</p>
+
+<p><img src="imgs/generation.gif" alt="Alt text" title="Space 2"> 
+<em><strong>Figure 9</strong> : Generation of three timesteps based on a seed of length 1. As note are not known in advance only the time recurrence can be done in one pass for each timestep.</em></p>
+
+<p>For each time-step &#39;&#39;t&#39;&#39;, the time RNN is run for one tick. Doing the pitch recurrence is the tricky part as we need to know the state of the pitch one half tone lower to generate the state of any new pitch. So, we start with a dummy state representing a fictitious one half lower tone, which is concatenated to the output of the time RNN corresponding to the lowest pitch. It is then fed to the pitch network and produces the play state for the lowest pitch at time &#39;&#39;t+1&#39;&#39;. This new state is then &quot;injected&quot; back to determine the next pitch until the full recursion over all pitches is done. The cycle can then go through another iteration by running the time network for one other tick using as input the new statematrix at time-step &#39;&#39;t+1&#39;&#39;. This continues until the number of time-steps required have been generated. Then, to obtain a score, we transform the newly created statematrix into a <em>music21</em> stream that can be saved to disk.</p>
+
+<p>A first step in augmenting the capacity of score generation of the network, is to add articulation marks. Indeed, the marks are note related and can be introduced as an augmentation of the state matrix. A one hot encoding is required as multiple marks can be imposed to a single note. Two approaches have been tested:</p>
+
+<ul>
+<li><p><em>Use a <strong>sigmoid</strong> activation</em>:
+The decision of adding an articulation mark or not is taken by looking at the probability returned by a sigmoid activation.</p></li>
+<li><p><em>Use a <strong>softmax</strong> activation</em>:
+The feature space is augmented again by indicating not only if an articulation mark is present but also if it is not, using one hot encoding. The decision can now be made by relying on a softmax on each pair of features representing an articulation mark. </p></li>
+</ul>
+
+<p>Due to the lack of presence of articulations in the dataset, no probable results were obtained. Probably because the network has not encountered enough meaningful example containing such articulation marks. A second augmentation could be dynamics. They are more complicated to introduce as they are not related to any specific note but to a specific number of times-steps and the current model design might to be a good fit for that.</p>
+
+<p>Here is a selection of some audio output of the network</p>
+
+<h5 id="toc_10">Sample 1</h5>
+
+<p><audio src="imgs/biaxial/sample1.mp3" preload="auto" controls></audio></p>
+
+<h5 id="toc_11">Sample 2</h5>
+
+<p><audio src="imgs/biaxial/sample2.mp3" preload="auto" controls></audio></p>
+
+<h5 id="toc_12">Sample 3</h5>
+
+<p><audio src="imgs/biaxial/sample4.mp3" preload="auto" controls></audio></p>
+
+<h5 id="toc_13">Sample 4</h5>
+
+<p><audio src="imgs/biaxial/sample3.mp3" preload="auto" controls></audio></p>
+
+<p>Exporting the statematrix directly to <em>MusicXML</em> is feasible. However, it won&#39;t be interpreted correctly by editing software (such as <em>musescore</em>). Notes will be put one after the other such that no chord nor voice will be created even though they might be played at the same time. So, we have to go through <em>MIDI</em> to obtain a relatively readable score as it doesn&#39;t need an indication of voices nor parts (<a href="#bigen">Fig. 10</a>) Unfortunately, this brings us back to square one.</p>
+
+<p><img src="imgs/biaxial_out.png" alt="Alt text" title="out 2"> 
+<em><strong>Figure 10</strong> : Raw output from the second network is not represented correctly in MusicXML due to the polyphonic nature of the generated pieces. On the other hand, the midi export is readable due to the creation of multiple part.</em></p>
+
+<h3 id="toc_14">Conclusion</h3>
+
+<p>As for the first network, the limitations are encountered during the creation of the score. The fact that the network now creates polyphonic pieces even increases the difficulty to obtain a visually valid partition as it becomes more and more difficult to assess where each note should go. The clear limitation brought by first looking at generating good sounding music then at generating visually pleasing score is that the creation of the score misses a lot of information. As shown by those networks, trying to reuse  models intended to do a slightly different task might not be the best solution and as hypothesized since the beginning, finding a good representation is the hardest part in building neural networks for modalities they have not been developed for. An interesting approach on the problem has been realized by Gaëtan Hadjeres and François Pachet in one of their publications<sup id="fnref5"><a href="#fn5" rel="footnote">5</a></sup>. Indeed, the biggest problem encountered during the score building is that we don&#39;t know in which voice the note should be put. Their approach is to let their model decide in which voice should each note be. Which Resolves the problem by only working with monophonic which are  concatenated to obtain a polyphonic score. Definitely worth exploring in a futur project.</p>
+
+<div class="footnotes">
+<hr>
+<ol>
+
+<li id="fn1">
+<p>http://jazzdup.nfshost.com/tutorial/tech/midifile/intro.htm &quot;MIDI File Basics&quot;&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn2">
+<p>http://www.petesqbsite.com/sections/express/issue18/midifilespart1.html &quot;SMF&quot;&nbsp;<a href="#fnref2" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn3">
+<p>https://www.musicxml.com/&nbsp;<a href="#fnref3" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn4">
+<p>http://people.cs.vt.edu/tilevich/papers/musiplectics.pdf&nbsp;<a href="#fnref4" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn5">
+<p>https://arxiv.org/abs/1612.01010&nbsp;<a href="#fnref5" rev="footnote">&#8617;</a></p>
+</li>
+
+</ol>
+</div>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.markup={comment:/<!--[\w\W]*?-->/,prolog:/<\?[\w\W]+?\?>/,doctype:/<!DOCTYPE[\w\W]+?>/,cdata:/<!\[CDATA\[[\w\W]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=.$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,inside:{tag:{pattern:/^<\/?[^\s>\/]+/i,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,inside:{punctuation:/[=>"']/}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:/&#?[\da-z]{1,8};/i},Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"))}),Prism.languages.xml=Prism.languages.markup,Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup;
+</script>
+
+
 </body>
+
 </html>
