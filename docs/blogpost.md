@@ -2,7 +2,7 @@
 
 _Project realized at [Swiss Federal Institute of Technology in Lausanne](epfl.ch) (EPFL) by Yoann Ponti, supervised by Nathanaël Perraudin et Michaël Defferrard._
 
-_The complementary repository can be found [here]()_
+_The complementary repository can be found [here](https://github.com/onanypoint/epfl-semester-project-biaxialnn)_
 
 
 Neural nets have been used in many different ways during the last few years, from recognition in computer vision to artificial intelligence in games and even music generation. Once a domain reserved to the scientific community, it is now possible without much effort to create your own neural networks (NN) thanks to amazing libraries maintained by the community. Lately some projects related to music generation and composition have emerged, such as the [magenta](https://magenta.tensorflow.org/) project from Google or the use of deepmind [wavenet](https://deepmind.com/blog/wavenet-generative-model-raw-audio/) to generate raw audio waveforms. As music depends on time, most of the models used to generate music rely on some tricks to take account of it. A sliding-window CNN or a FC NN could do it by looking at the previously generated notes, but most of the model we looked at used some kinds of recurrent neural networks (RNN).
@@ -50,7 +50,7 @@ The dataset was created using [musescore.com](http://musescore.com/) as it offer
 
 We could have worked directly with the [piano-midi](http://www.piano-midi.de/) dataset as we are almost certain that all scores are of good quality. The pieces of this dataset are all from great composer. Unfortunately, as the name implies all the scores are in _MIDI_ format which does not completely fit our needs. There is a lack of information that we might want to use later on in order to generate scores, such as articulation marks.
 
-The related code used in this post can be found on [git#TODO](). You can also find a reference notebook which goes through the followed pipeline or simply use the [dataprep#TODO]() files to retrieve MusicXML scores. Due to the implementation of the _musecore_ API, the metadata have to be retrieved first which offers the possibility of choosing beforehand which scores to finally retrieve, thus avoiding unnecessary downloads. 
+The related code used in this post can be found on [github](https://github.com/onanypoint/epfl-semester-project-biaxialnn). You can also find a reference notebook which goes through the followed pipeline or simply use the [dataprep](https://github.com/onanypoint/epfl-semester-project-biaxialnn/tree/master/utils) files to retrieve MusicXML scores. Due to the implementation of the _musecore_ API, the metadata have to be retrieved first which offers the possibility of choosing beforehand which scores to finally retrieve, thus avoiding unnecessary downloads. 
 
 We have two attributes at our disposal to filter the API query. 
 
