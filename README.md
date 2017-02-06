@@ -1,8 +1,8 @@
 # Music Score Generation
 
-_Project realized at [Swiss Federal Institute of Technology in Lausanne](epfl.ch) (EPFL) by Yoann Ponti, supervised by Nathanaël Perraudin et Michaël Defferrard._
+_Project realized at [Swiss Federal Institute of Technology in Lausanne](epfl.ch) (EPFL) by Yoann Ponti, supervised by Nathanaël Perraudin and Michaël Defferrard._
 
-_The complementary blogpost can be found [here](https://onanypoint.github.io/epfl-semester-project-biaxialnn/)_
+_The complementary blogpost can be found [here](https://onanypoint.github.io/epfl-semester-project-biaxialnn/)._
 
 ## Getting Started
 

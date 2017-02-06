@@ -1,6 +1,6 @@
 # Score generation using recurrent neural networks
 
-_Project realized at [Swiss Federal Institute of Technology in Lausanne](epfl.ch) (EPFL) by Yoann Ponti, supervised by Nathanaël Perraudin et Michaël Defferrard._
+_Project realized at [Swiss Federal Institute of Technology in Lausanne](epfl.ch) (EPFL) by Yoann Ponti, supervised by Nathanaël Perraudin and Michaël Defferrard._
 
 _The complementary repository can be found [here](https://github.com/onanypoint/epfl-semester-project-biaxialnn)_
 
